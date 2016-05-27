@@ -1,0 +1,286 @@
+configuração inicial
+a primeira coisa a fazer!
+
+git config --global user.name "Thiago Bianeck"
+
+depois configurar o endereço de e-mail
+
+git config --global user.email "bianeck27@gmail.com"
+
+-------------------- AULA 02 ---------------------------
+https://www.youtube.com/watch?v=-GhA2JPImgU&list=PLInBAd9OZCzzHBJjLFZzRl6DgUmOeG3H0&index=2
+
+git init 
+/*Inicia um novo repositorio */
+
+git status
+/*Para saber qual o status*/
+
+git add nomedoarquivo.ext
+/*Para começar a trackear o arquivo*/
+
+git add *.txt
+/*Adiciona todos os arquivos .txt*/
+
+git add .
+/*adiciona todos os arquivos*/
+
+/* Quando aciono o git add, estou adicionando meus arquivos na stagging area */
+
+/*confirmar a mudança, tirando da stagging area e mandando pro repositório*/
+
+git commit -m "Mensagem do meu commit para identificar"
+
+
+git status /*Verificar*/
+
+/*so pra lembrar: quando uso o git add, estou adicionando os arquivos na sttagging area, quando aciono o git commit, estou mandando pro repositório.*/
+
+/*Como fazer para o git ignorar determinados arquivos?*/
+/* Criar um arquivo na pasta com o nome .gitignore
+colocar dentro do arquivo o que deseja-se ignorar*/
+
+pode-se colocar pastas usando a barra. ex.: temp/
+posso usar curingas também
+
+git commit -a -m "Nova mensagem com descrição do commit"
+
+/*o -a serve para pular a etapa do add*/
+
+
+-------------------- AULA 03 -------------------------
+
+/*Para saber o que foi alterado dentro do arquivo*/
+
+git diff
+
+/*Para saber o que foi alterado e que está na stagging area*/
+
+git diff --staged
+
+/* o que foi adicionado com o git add . ainda está na staging area, esse comando serve pra mostrar o que ainda não foi comitado. ou seja, o que ainda não foi enviado para o repositório. */
+
+git log 
+/* Esse comando mostra o log de todos os comits que foram feitos desde o primeiro*/
+
+commit f6a2392b0c40648945e310495369be04e958e7cc
+Author: Thiago Bianeck <bianeck27@gmail.com>
+Date:   Thu May 26 01:33:43 2016 -0300
+
+/*Essa chave no inicio serve para referenciar o comit, caso deseje voltar à versão anterior.*/
+
+
+git log -p
+/* Esee parametro -p no git log, mostra também o diff de cada commit*/
+
+git log -p -3
+
+/* nesse caso eu limitei para que ele mostrasse no log apenas 3 commits com seus diff's, o que pode ser alterado para 'n' valores necessários.*/
+
+/* para visualizare de forma mais detalhada utilizar a interface grafica./*
+
+gitk
+
+/*Abre A visualização do relatório de alterações do GIT*/
+
+-------------------- AULA 04 -------------------------
+
+/*DESFAZENDO OU REVERTENDO ALTERAÇÕES DENTRO DO REPOSITÓRIO*/
+
+git log --pretty=oneline
+
+/*Mostra apenas o codigo de cada commit e a mensagem*/
+
+/*Adicionar alterações ao novo commit*/
+
+git commit --amend -m "Novoas Funcionalidades (edicao)"
+
+/*Posso então assim alterar o commit com novas informações que esqueci de adciionar*/
+
+//DEIXAR ARQUIVO FORA DO COMMIT
+
+//REMOVER ARQUIVO DA STAGGING AREA
+
+git reset HEAD nomedoarquivo.ext
+
+
+//reverter alterações
+
+git checkout -- nomedoarquivo.ext
+
+git rm
+///remove arquivos do repositorio
+
+-------------------- AULA 05 -------------------------
+//TAGS E BRANCHS
+
+//TAG É UM ATALHO PARA UM DETERMINADO ESTADO OU VERSÃO - DATA E HORA ESPECIFICA, FAZER CONSULTAS DE COMO ERA NA VERSÃO ANTERIOR
+
+//PARA LISTAR USAR O COMANDO
+
+git tag
+
+//COMO ADICIONAR TAG?
+
+git tag -a [nome da tag] -m "Mensagem"
+
+//o -a serve para criar uma tag anotada
+// a tag é criada no commit atual, ou seja no qual vc esta trabalhando
+
+//posso criar uma tag com um commit antigo do sistema
+
+git tag -a V0.0 (digito a chave do commit)
+
+//para saber mais detalhes sobre a tag digite
+
+git show [versaodatag]
+
+//como utilizar a tag
+
+//verificar arquivos da versão anterior, do commit anterior. faz a troca dos arquivos para aquele ponto
+
+git checkout [tag do commit]
+
+//voltar o arquivo para o estado original // branch master
+
+git checkout master
+//volta ao padrão
+
+//deletando uma tag
+
+git tag -d [nome da tag]
+
+//UTILIZANDO BRANCHS
+
+//BRANCHS SÃO RAMIFICAÇÕES DENTRO DO SISTEMA
+//POSSO FAZER COMMIT NUMA RAMIFICAÇÃO SEM ALTERAR A OUTRA RAMIFICAÇÃO
+
+
+//O BRANCH PADRÃO E O MASTER
+
+//CRIAR RAMIFICAÇÃO PARA SER O AMBIENTE DE TESTE
+
+git branch teste
+
+//para abrir o branch
+
+git checkout e nom do branch
+
+git checkout teste
+
+//trazer as alterações que foram feitas no ambiente de teste
+//para isso vc deve estar no branch destino
+
+git merge teste
+
+//feito isso sera feito o update do arquivo
+
+///para deletar um branch
+git branch -d teste
+
+///para listra os branchs no sistema
+
+git branch
+
+//na aula criei uma branc teste 2 e fiz modificações
+//depois voltei para a master e fiz também modificações na mesma linha
+
+//vou usar o merge para unir os branchs
+
+//no arquivo original é solicitado que vc altere para qual opção deseja utilizar
+
+
+//fiz as alterações
+//fiz o commit
+
+-------------------- AULA 06 -------------------------
+
+acessando na rede
+
+para acessar na rede
+no servidor devo instalar o git e ao inves de dar o git init comum, aplico o 
+
+git init --bare
+
+para clonar a pasta do servidor
+
+git clone file:////[caminho da pasta no servidor] [nome novo que eu quero usar no projeto]
+
+//depois de clonado então adiciono os arquivos do desenvolvimento na pasta
+
+//adiciono e comito
+
+///depois que fizer os procedimentos e adicionar os arquivos, preciso dar um push
+///para o servidor
+
+
+git remote
+
+///quando eu faço um clone, originalmente ele se chama origin
+
+//estou no remoto origin
+
+git push origin master
+
+///git, envie os arquivos do origin que estão agora no master
+
+
+// baixar atualizações do servidor sem clone
+
+git pull origin master
+
+///o git pull automaticamente faz um merge dos arquivos.
+
+-------------------- AULA 07 -------------------------
+///GITHUB EM CONJUNTO COM O GIT PARA CONTROLE DE VERSÕES//
+
+///primeiro gerar o par de chaves ssh no git bash
+
+ssh-keygen
+
+//ele irá gerar o ssh que irá ser salvo no computador
+//abrir o arquivo ssh e copiar a chave
+//depois abrir o site github e adcionar a chave
+
+//depois criar o repositorio
+
+//para usar o repositorio no github preciso clonar
+
+//pegar no site do github o ssh do repositorio
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
